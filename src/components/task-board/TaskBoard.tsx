@@ -247,7 +247,7 @@ export default function TaskBoard() {
             <div className="app-container">
                 <header className="app-header">
                     <div>
-                        <h1 className="app-header-title">Simple Task Board</h1>
+                        <h1 className="app-header-title theme-sync">Simple Task Board</h1>
                         <p className="app-header-subtitle">
                             공부, 개인 프로젝트, 취업 준비 작업들을 한 곳에서 관리하는 간단한 작업 보드입니다.
                         </p>
@@ -468,10 +468,7 @@ export default function TaskBoard() {
                                                 )}
                                                 <div className="mt-2 flex flex-wrap gap-1">
                                                     {task.tags?.map((tag, i) => (
-                                                        <span
-                                                            key={i}
-                                                            className="rounded-full bg-indigo-100 px-2 py-0.5 text-[10px] text-indigo-700 dark:bg-indigo-900/60 dark:text-indigo-300"
-                                                        >
+                                                        <span key={i} className="tag-badge">
                                                             #{tag}
                                                         </span>
                                                     ))}
