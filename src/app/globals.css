@@ -34,7 +34,7 @@
     }
 
     .card-toolbar {
-        @apply mb-6 flex flex-col gap-3 md:flex-row md:items-center md:justify-between md:px-4 md:py-3;
+        @apply mb-6 flex flex-col gap-3 px-4 py-3 md:flex-row md:items-center md:justify-between;
     }
 
     .card-body {

@@ -288,7 +288,7 @@ export default function TaskBoard() {
                         </div>
                     </div>
 
-                    <div className="flex items-center gap-2 text-xs md:text-sm">
+                    <div className="mt-2 flex items-center gap-2 text-xs md:mt-0 md:text-sm">
                         <span className="whitespace-nowrap text-slate-400 dark:text-slate-500">정렬:</span>
                         <select
                             className="input-default px-2 py-1 text-xs md:text-sm"
