@@ -42,7 +42,7 @@ Next.js 14(App Router) 기반으로 제작되었으며, LocalStorage를 활용�
 ## 📦 Installation
 
 ```bash
-git clone https://github.com/계정명/레포명.git
+git clone https://github.com/AnyTHIW/taskboard
 cd 레포명
 npm install
 npm run dev
