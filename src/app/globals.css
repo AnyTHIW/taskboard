@@ -3,16 +3,18 @@
 @tailwind utilities;
 
 @layer components {
-    /* 레이아웃 / 전체 배경 */
-    /* 토글: 루트에만 컬러 전환 */
+    /* 전체 레이아웃 */
     .app-root {
-        --theme-delay: 1500ms; /* 토글 후 지연 */
-        --theme-duration: 1000ms; /* 전환 시간 */
+        --theme-delay: 1500ms;
+        --theme-duration: 1000ms;
+
+        --light-on-delay: 1500ms;
+        --light-on-duration: 1500ms;
 
         @apply min-h-screen bg-slate-50 text-slate-900 dark:bg-slate-950 dark:text-slate-100;
 
         transition-property: background-color;
-        transition-duration: var(--theme-duration, 1000ms);
+        transition-duration: var(--theme-duration, 0ms);
         transition-delay: var(--theme-delay, 0ms);
     }
 
@@ -25,20 +27,14 @@
         @apply mb-6 flex flex-col gap-3 md:mb-8 md:flex-row md:items-end md:justify-between;
     }
 
-    /* 제목은 상속 컬러 변화에 반응하지 않도록 트랜지션 해제 + 색 명시 */
     .app-header-title {
-        @apply text-2xl font-bold tracking-tight text-slate-900 antialiased transition-colors dark:text-slate-100 md:text-3xl;
+        @apply text-2xl font-bold tracking-tight text-slate-900 dark:text-slate-100 md:text-3xl;
     }
 
     .app-header-subtitle {
         @apply mt-2 max-w-xl text-sm text-slate-500 dark:text-slate-400;
     }
 
-    .app-header-right {
-        @apply flex items-center gap-3;
-    }
-
-    /* 11 */
     /* 카드 공통 */
     .card {
         @apply rounded-xl border border-slate-200 bg-white shadow-md dark:border-slate-800 dark:bg-slate-900/70;
@@ -48,11 +44,6 @@
         @apply mb-6 flex flex-col gap-3 px-4 py-3 md:flex-row md:items-center md:justify-between;
     }
 
-    .card-body {
-        @apply p-4;
-    }
-
-    /* 10 */
     /* 인풋 */
     .input-default {
         @apply w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm text-slate-900 outline-none focus:border-indigo-500 dark:border-slate-700 dark:bg-slate-950 dark:text-slate-100;
@@ -67,6 +58,15 @@
         @apply rounded-lg bg-indigo-600 px-4 py-2 text-sm font-medium text-white hover:bg-indigo-500 active:bg-indigo-700;
     }
 
+    .btn-theme-toggle {
+        @apply flex min-w-[30px] items-center justify-center rounded-full border border-slate-300 bg-white px-3 py-1 text-xs text-slate-800 hover:bg-slate-100 dark:border-slate-600 dark:bg-slate-900 dark:text-slate-100 dark:hover:bg-slate-800;
+
+        margin-top: -1rem; /* 🔥 위로 살짝 끌어올리기 (겹치게) */
+        position: relative;
+        z-index: 2; /* 🔥 불빛보다 항상 위에 오도록 */
+    }
+
+    /* 필터 버튼 */
     .btn-filter {
         @apply rounded-full px-3 py-1 text-xs;
     }
@@ -75,33 +75,25 @@
         @apply bg-indigo-600 text-white;
     }
 
-    /* 2 */
     .btn-filter-inactive {
         @apply bg-slate-200 text-slate-800 hover:bg-slate-300 dark:bg-slate-800 dark:text-slate-200 dark:hover:bg-slate-700;
     }
 
-    /* 3 */
-    .btn-theme-toggle {
-        @apply flex min-w-[120px] items-center justify-center rounded-full border border-slate-300 bg-white px-3 py-1 text-xs text-slate-800 hover:bg-slate-100 dark:border-slate-600 dark:bg-slate-900 dark:text-slate-100 dark:hover:bg-slate-800;
-    }
-
-    /* 4 */
+    /* 태스크 상태 변경 버튼 */
     .task-btn {
         @apply rounded-full border border-slate-300 px-3 py-1 text-xs text-slate-700 hover:border-indigo-500 dark:border-slate-700 dark:text-slate-200 dark:hover:border-indigo-500;
     }
 
-    /* 5 */
-    /* 상태 칩 / 배지 */
+    /* 상태 칩 / 배지 (상단 요약 칩) */
     .status-chip {
         @apply inline-flex items-center gap-1 rounded-full border border-slate-300 bg-white px-2.5 py-1 text-xs text-slate-600 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-300;
     }
 
-    /* 6 */
     .status-chip-count {
         @apply rounded-full bg-slate-200 px-2 py-0.5 text-[10px] dark:bg-slate-700;
     }
 
-    /* 7 */
+    /* 각 Task의 상태 뱃지 (할 일 / 진행 중 / 완료) */
     .status-badge {
         @apply inline-flex rounded-full border px-3 py-1 text-[10px] font-medium;
     }
@@ -118,8 +110,6 @@
         @apply border-emerald-400 bg-emerald-100 text-emerald-800 dark:border-emerald-500/60 dark:bg-emerald-900/60 dark:text-emerald-200;
     }
 
-    /* 8 */
-    /* 태스크 카드 / 빈 상태 */
     .task-card {
         @apply flex gap-3 rounded-xl border border-slate-200 bg-white p-4 text-sm dark:border-slate-800 dark:bg-slate-900/70;
     }
@@ -128,26 +118,68 @@
         @apply rounded-xl border border-dashed border-slate-300 bg-white px-4 py-8 text-center text-base text-slate-500 dark:border-slate-700 dark:bg-slate-900/40 dark:text-slate-400;
     }
 
-    /* 9 */
     .tag-badge {
         @apply rounded-full bg-indigo-100 px-2 py-0.5 text-[10px] text-indigo-700 dark:bg-indigo-900/60 dark:text-indigo-300;
+    }
+
+    /* 🔥 불빛 (팬 라이트) */
+    .light-source {
+        @apply relative inline-block;
+        width: 2.5rem; /* 대략 40px */
+        height: 5rem;
+        overflow: visible;
+        z-index: 0;
+    }
+
+    .light-source::after {
+        content: '';
+        position: absolute;
+        left: 50%;
+        top: -80%;
+
+        width: 400%;
+        height: 180%;
+        pointer-events: none;
+        z-index: 1;
+
+        /* 부채 손잡이(아래 중앙) 기준 */
+        transform-origin: 50% 100%;
+
+        /* 👉 라이트(기본) 상태: 거의 접힌 상태 */
+        transform: translateX(-50%) translateY(-4px) scaleX(0.05) scaleY(1);
+        opacity: 0;
+
+        clip-path: polygon(50% -20%, 100% 100%, 0% 100%);
+
+        background: radial-gradient(
+            ellipse at 50% 20%,
+            rgba(255, 233, 150, 0.95) 0%,
+            rgba(255, 204, 80, 0.45) 35%,
+            rgba(255, 204, 80, 0.12) 60%,
+            transparent 70%
+        );
+
+        filter: drop-shadow(0 0 0 rgba(0, 0, 0, 0));
+
+        /* 🔁 여기서부터 transition으로만 처리 */
+        transition-property: opacity, transform, filter;
+        transition-duration: var(--light-on-duration, 0ms);
+        transition-timing-function: cubic-bezier(0.25, 0.8, 0.3, 1);
+        transition-delay: var(--light-on-delay, 0ms);
+    }
+
+    /* 다크 모드 고정 상태 */
+    .dark .light-source::after {
+        opacity: 1;
+        transform: translateX(-50%) translateY(-4px) scaleX(1) scaleY(1);
+        filter: drop-shadow(0 6px 12px rgba(255, 210, 120, 0.4));
     }
 }
 
 @layer utilities {
     .app-root :where(*) {
         transition-property: color, background-color, border-color, fill, stroke;
-        transition-duration: 150ms; /* 필요 시 100~200ms */
+        transition-duration: 150ms;
         transition-delay: 0ms;
-    }
-
-    .theme-sync {
-        transition-property: color, fill, stroke !important;
-        transition-duration: var(--theme-duration, 1000ms) !important;
-        transition-delay: var(--theme-delay, 0ms) !important;
-    }
-
-    .no-transition {
-        transition: none !important;
     }
 }
