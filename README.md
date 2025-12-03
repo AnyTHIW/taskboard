@@ -6,8 +6,8 @@ Next.js 14(App Router) 기반으로 제작되었으며, LocalStorage를 활용�
 ---
 
 ## 🚀 Demo
-- **Live Demo:** https://taskboardforme.vercel.app/
-- **GitHub Repo:** https://github.com/AnyTHIW/taskboard/
+- **Live Demo:** https://taskboardforme.vercel.app
+- **GitHub Repo:** https://github.com/AnyTHIW/taskboard
 
 ---
 
